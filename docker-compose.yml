@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  kiosk-backend:
+    build: ./bike-kiosk-server
+    image: bike-kiosk-server-image
+    container_name: bike-kiosk-server-container
+    ports:
+      - "2482:2482"
+    volumes:
+      - ./bike-kiosk-server/labels:/app/labels
+      - ./bike-kiosk-server/labelsOff:/app/labelsOff
+    networks:
+      - app-network
+
+  kiosk-frontend:
+    build: ./bike-kiosk-client
+    image: bike-kiosk-client-image
+    container_name: bike-kiosk-client-container
+    ports:
+      - "2481:80"
+    depends_on:
+      - kiosk-backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
