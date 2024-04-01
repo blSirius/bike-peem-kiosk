@@ -59,7 +59,7 @@ function Greeting({ propData }) {
         propData.forEach(data => {
             const label = data.name.replace(/\s+/g, '');
             const utterance = new SpeechSynthesisUtterance(`สวัสดี${label}${data.greeting}`);
-            utterance.voice = voices.find(v => v.name.includes('Premwadee')) || null;
+            utterance.voice = voices.find(v => v.name.includes('Microsoft Pattara')) || null;
             utterance.rate = 1.1;
             speechSynthesis.speak(utterance);
         });
